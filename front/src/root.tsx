@@ -1,6 +1,6 @@
 import * as React from 'react'
-import * as ReactDom from "react-dom"
-import { Switch, BrowserRouter, Route, Redirect } from "react-router-dom";
+import { Switch, BrowserRouter, Route } from "react-router-dom";
+
 import Nav from "pages/Nav"
 import Index from "pages/index"
 import Gender from "pages/gender"
@@ -9,32 +9,38 @@ import AdminIndex from "adminPages/index"
 import Footer from "pages/footer"
 import OnSale from "pages/onSale"
 import productDetail from "pages/productDetail"
-import ProductCardList from 'pages/productCardList'
-
-import 'style/bootstrap-grid.min.css';
+import loginAndSignUp from 'pages/loginAndSignUp'
 import NoMatch from 'pages/NoMatch';
+import { initState, makeReducer, Context } from 'store/store'
 
-//1051619
+import {GlobalStyle} from 'style/globalStyle'
+import 'style/bootstrap-grid.min.css';
+
 const Root = () => {
     console.log('render root')
+    const [state, dispatch] = React.useReducer(makeReducer, initState);
     return (
-        <BrowserRouter>
-            <div className="container">
-                <Nav />
-                <main>
-                    <Switch>
-                        <Route exact path="/" component={Index}></Route>
-                        <Route path="/gender/:genderUrl/:subCategoryUrl" component={Gender}></Route>
-                        <Route path="/detail/:productId" component={productDetail}></Route>
-                        <Route path="/onSale/:onSaleId" component={OnSale}></Route>
-                        <Route path="/pay/" component={Pay}></Route>
-                        <Route path="/admin/" component={AdminIndex}></Route>
-                        <Route component={NoMatch}></Route>
-                    </Switch>
-                </main>
-                <Footer />
-            </div>
-        </BrowserRouter>
+        <Context.Provider value={{ state, dispatch }}>
+                <BrowserRouter>
+                <GlobalStyle/>
+                    <div className="container">
+                        <Nav />
+                        <main>
+                            <Switch>
+                                <Route exact path="/" component={Index}></Route>
+                                <Route path="/gender/:genderUrl/:subCategoryUrl" component={Gender}></Route>
+                                <Route path="/detail/:productId" component={productDetail}></Route>
+                                <Route path="/onSale/:onSaleId" component={OnSale}></Route>
+                                <Route path="/loginAndSignUp" component={loginAndSignUp}></Route>
+                                <Route path="/pay/" component={Pay}></Route>
+                                <Route path="/admin/" component={AdminIndex}></Route>
+                                <Route component={NoMatch}></Route>
+                            </Switch>
+                        </main>
+                        <Footer />
+                    </div>
+                </BrowserRouter>
+        </Context.Provider>
     )
 }
 export default Root

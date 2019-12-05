@@ -1,7 +1,10 @@
 import * as React from 'react'
+import styled from 'styled-components'
+const IndexWrapper = styled.section`
+`
 const Index = () => {
     return (
-        <section>
+        <IndexWrapper>
             <div></div>
             <div>
                 <img src={require('img/index/comment.gif')} alt="" />
@@ -13,9 +16,8 @@ const Index = () => {
                 <img src={require('img/index/line.gif')} alt="" />
             </div>
             <div>
-
             </div>
-        </section>
+        </IndexWrapper>
     )
 }
 

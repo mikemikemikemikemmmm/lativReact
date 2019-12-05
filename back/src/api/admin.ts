@@ -1,4 +1,4 @@
-import connectDB from "./global/connectDB"
+import connectDB from "../utils/connectDB"
 import { Request, Response } from "express";
 export const product= {
     async postNew(req: Request, res: Response) {

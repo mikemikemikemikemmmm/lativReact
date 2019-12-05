@@ -1,6 +1,6 @@
 
 import * as mysql from 'mysql'
-import sqlConfig from '../../config/sql'
+import sqlConfig from '../config/sql'
 import IConnectDBResult from './interface'
 const connectDB = (sqlQuery: string) => {
     return new Promise<IConnectDBResult>((resolve, reject) => {
@@ -23,7 +23,10 @@ const connectDB = (sqlQuery: string) => {
                 return
             }
             resolve({ content: results, isSuccess: true })
+            
         });
+        connection.end();
+
     }).catch((errObj: IConnectDBResult) => {
         return errObj
     })
